@@ -3560,6 +3560,9 @@ body[data-theme='light'] .page-hero-overlay {
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.4s ease;
+  min-height: 610px;
+  display: flex;
+  flex-direction: column;
 }
 
 .service-card:hover {
@@ -3579,17 +3582,17 @@ body[data-theme='light'] .page-hero-overlay {
 
 .service-card-image {
   position: relative;
-  height: 200px;
+  height: 280px;
   overflow: hidden;
 }
 
 .service-card-featured .service-card-image {
-  height: 300px;
+  height: 360px;
 }
 
 .service-card-horizontal .service-card-image {
   height: 100%;
-  min-height: 300px;
+  min-height: 360px;
 }
 
 .service-card-image img {
@@ -3616,7 +3619,10 @@ body[data-theme='light'] .page-hero-overlay {
 }
 
 .service-card-content {
-  padding: 24px;
+  padding: 30px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .service-card-title {
@@ -3629,12 +3635,12 @@ body[data-theme='light'] .page-hero-overlay {
 .service-card-desc {
   color: var(--color-text-muted);
   font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.7;
+  margin-bottom: 24px;
 }
 
 .service-pricing-table {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .pricing-row {
@@ -3677,6 +3683,7 @@ body[data-theme='light'] .page-hero-overlay {
   letter-spacing: 2px;
   text-transform: uppercase;
   transition: gap 0.3s ease;
+  margin-top: auto;
 }
 
 .service-book-btn:hover {
@@ -5409,6 +5416,20 @@ body[data-theme='light'] .blog-quote-text {
     grid-column: span 1;
     grid-template-columns: 1fr;
   }
+
+  .service-card {
+    min-height: 0;
+  }
+
+  .service-card-image {
+    height: 300px;
+  }
+
+  .service-card-featured .service-card-image,
+  .service-card-horizontal .service-card-image {
+    min-height: 0;
+    height: 320px;
+  }
   
   .packages-grid {
     grid-template-columns: 1fr;
@@ -5483,6 +5504,19 @@ body[data-theme='light'] .blog-quote-text {
   
   .gallery-item-tall .gallery-item-inner {
     min-height: 250px;
+  }
+
+  .service-card-image {
+    height: 260px;
+  }
+
+  .service-card-featured .service-card-image,
+  .service-card-horizontal .service-card-image {
+    height: 280px;
+  }
+
+  .service-card-content {
+    padding: 26px 22px 22px;
   }
   
   .blog-section {
@@ -5573,6 +5607,19 @@ body[data-theme='light'] .blog-quote-text {
 }
 
 @media (max-width: 480px) {
+  .service-card-image {
+    height: 230px;
+  }
+
+  .service-card-featured .service-card-image,
+  .service-card-horizontal .service-card-image {
+    height: 250px;
+  }
+
+  .service-card-content {
+    padding: 22px 18px 20px;
+  }
+
   .footer-links-grid {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -6907,4 +6954,3 @@ body[data-theme='light'] .blog-quote-text {
   transform: translateY(-2px);
   transition: transform 0.3s ease;
 }
-
