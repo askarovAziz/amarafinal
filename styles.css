@@ -3582,17 +3582,17 @@ body[data-theme='light'] .page-hero-overlay {
 
 .service-card-image {
   position: relative;
-  height: 280px;
+  height: 420px;
   overflow: hidden;
 }
 
 .service-card-featured .service-card-image {
-  height: 360px;
+  height: 540px;
 }
 
 .service-card-horizontal .service-card-image {
   height: 100%;
-  min-height: 360px;
+  min-height: 540px;
 }
 
 .service-card-image img {
@@ -5422,13 +5422,13 @@ body[data-theme='light'] .blog-quote-text {
   }
 
   .service-card-image {
-    height: 300px;
+    height: 450px;
   }
 
   .service-card-featured .service-card-image,
   .service-card-horizontal .service-card-image {
     min-height: 0;
-    height: 320px;
+    height: 480px;
   }
   
   .packages-grid {
@@ -5507,12 +5507,12 @@ body[data-theme='light'] .blog-quote-text {
   }
 
   .service-card-image {
-    height: 260px;
+    height: 390px;
   }
 
   .service-card-featured .service-card-image,
   .service-card-horizontal .service-card-image {
-    height: 280px;
+    height: 420px;
   }
 
   .service-card-content {
@@ -5608,12 +5608,12 @@ body[data-theme='light'] .blog-quote-text {
 
 @media (max-width: 480px) {
   .service-card-image {
-    height: 230px;
+    height: 345px;
   }
 
   .service-card-featured .service-card-image,
   .service-card-horizontal .service-card-image {
-    height: 250px;
+    height: 375px;
   }
 
   .service-card-content {
