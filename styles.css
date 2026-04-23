@@ -604,8 +604,11 @@ body[data-theme='light'] .mobile-nav .mobile-theme-toggle {
   margin: 0 auto;
   padding: clamp(30px, 5vw, 52px);
   border: 1px solid rgba(212, 165, 116, 0.48);
-  background: linear-gradient(135deg, rgba(26, 20, 16, 0.92), rgba(15, 12, 10, 0.92));
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5), inset 0 0 70px rgba(212, 165, 116, 0.1);
+  background:
+    radial-gradient(circle at 18% 25%, rgba(246, 215, 172, 0.22), transparent 38%),
+    radial-gradient(circle at 82% 78%, rgba(211, 164, 105, 0.2), transparent 42%),
+    linear-gradient(135deg, rgba(53, 38, 26, 0.96), rgba(24, 17, 12, 0.95));
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5), inset 0 0 90px rgba(212, 165, 116, 0.18);
 }
 
 .grand-opening-card::before {
