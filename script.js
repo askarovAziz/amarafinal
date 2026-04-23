@@ -3,15 +3,23 @@
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
+  function extractNumericAedPrice(priceText) {
+    if (typeof priceText !== 'string') return Number.POSITIVE_INFINITY;
+
+    const normalizedText = priceText.replace(/,/g, '');
+    const aedMatch = normalizedText.match(/(\d+(?:\.\d+)?)\s*AED/i);
+    if (aedMatch) return Number.parseFloat(aedMatch[1]);
+
+    const fallbackMatch = normalizedText.match(/\d+(?:\.\d+)?/);
+    return fallbackMatch ? Number.parseFloat(fallbackMatch[0]) : Number.POSITIVE_INFINITY;
+  }
+
   function getLowestPriceFromCard(card, priceSelector) {
     const priceNodes = card.querySelectorAll(priceSelector);
     if (!priceNodes.length) return Number.POSITIVE_INFINITY;
 
     const prices = Array.from(priceNodes)
-      .map((node) => {
-        const match = node.textContent.replace(/,/g, '').match(/\d+/);
-        return match ? Number.parseInt(match[0], 10) : Number.POSITIVE_INFINITY;
-      })
+      .map((node) => extractNumericAedPrice(node.textContent))
       .filter((price) => Number.isFinite(price));
 
     return prices.length ? Math.min(...prices) : Number.POSITIVE_INFINITY;
@@ -26,6 +34,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     cards
       .sort((leftCard, rightCard) => {
+        const leftPrice = getLowestPriceFromCard(leftCard, priceSelector);
+        const rightPrice = getLowestPriceFromCard(rightCard, priceSelector);
+        return leftPrice - rightPrice;
+      })
+      .forEach((card) => grid.appendChild(card));
+  }
+
+  function sortCardsByCategoryThenPrice({
+    gridSelector,
+    cardSelector,
+    priceSelector,
+    categoryOrder = []
+  }) {
+    const grid = document.querySelector(gridSelector);
+    if (!grid) return;
+
+    const cards = Array.from(grid.querySelectorAll(cardSelector));
+    if (cards.length < 2) return;
+
+    const categoryRank = new Map(categoryOrder.map((category, index) => [category, index]));
+
+    cards
+      .sort((leftCard, rightCard) => {
+        const leftCategory = leftCard.dataset.category || '';
+        const rightCategory = rightCard.dataset.category || '';
+        const leftRank = categoryRank.has(leftCategory) ? categoryRank.get(leftCategory) : Number.MAX_SAFE_INTEGER;
+        const rightRank = categoryRank.has(rightCategory) ? categoryRank.get(rightCategory) : Number.MAX_SAFE_INTEGER;
+
+        if (leftRank !== rightRank) return leftRank - rightRank;
+
         const leftPrice = getLowestPriceFromCard(leftCard, priceSelector);
         const rightPrice = getLowestPriceFromCard(rightCard, priceSelector);
         return leftPrice - rightPrice;
@@ -169,7 +207,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  sortCardsByAscendingPrice('#massagesGrid', '.massage-card', '.price-amount');
+  sortCardsByCategoryThenPrice({
+    gridSelector: '#massagesGrid',
+    cardSelector: '.massage-card',
+    priceSelector: '.price-amount',
+    categoryOrder: ['massage', 'wellness', 'body-bath', 'waxing']
+  });
   sortCardsByAscendingPrice('#massage .services-grid', '.service-card', '.pricing-amount');
 
   // ========================================
@@ -1311,4 +1354,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     revealElements.forEach(el => revealObserver.observe(el));
 });
-
