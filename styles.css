@@ -3560,7 +3560,7 @@ body[data-theme='light'] .page-hero-overlay {
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.4s ease;
-  min-height: 793px;
+  min-height: 610px;
   display: flex;
   flex-direction: column;
 }
