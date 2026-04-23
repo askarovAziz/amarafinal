@@ -366,14 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const MOBILE_BREAKPOINT = 768;
     const getCollapsedLimit = () => (window.innerWidth <= MOBILE_BREAKPOINT ? 4 : 9);
 
-    const applyMassagesState = ({ animate = true } = {}) => {
-      const previousHeight = massagesGrid.scrollHeight;
-
-      if (animate) {
-        massagesGrid.style.maxHeight = `${previousHeight}px`;
-        void massagesGrid.offsetHeight;
-      }
-
+    const applyMassagesState = () => {
       const visibleCards = massageCards.filter((card) => {
         const category = card.dataset.category;
         return activeFilter === 'all' || category === activeFilter;
@@ -397,24 +390,11 @@ document.addEventListener('DOMContentLoaded', function() {
         isExpanded = false;
         massagesToggleBtn.textContent = 'See more';
         massagesToggleBtn.setAttribute('aria-expanded', 'false');
-        massagesGrid.style.maxHeight = '';
         return;
       }
 
       massagesToggleBtn.textContent = shouldExpand ? 'See Less' : 'See more';
       massagesToggleBtn.setAttribute('aria-expanded', String(shouldExpand));
-
-      const targetHeight = massagesGrid.scrollHeight;
-
-      massagesGrid.style.maxHeight = `${targetHeight}px`;
-
-      if (shouldExpand) {
-        window.setTimeout(() => {
-          if (isExpanded && activeFilter) {
-            massagesGrid.style.maxHeight = 'none';
-          }
-        }, 420);
-      }
     };
 
     filterButtons.forEach((button) => {
@@ -428,26 +408,24 @@ document.addEventListener('DOMContentLoaded', function() {
           btn.setAttribute('aria-selected', String(isActive));
         });
 
-        applyMassagesState({ animate: true });
+        applyMassagesState();
       });
     });
 
     massagesToggleBtn.addEventListener('click', () => {
       isExpanded = !isExpanded;
-      applyMassagesState({ animate: true });
+      applyMassagesState();
     });
 
     let resizeTimer;
     window.addEventListener('resize', () => {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
-        applyMassagesState({ animate: false });
+        applyMassagesState();
       }, 120);
     });
 
-    massagesGrid.style.overflow = 'hidden';
-    massagesGrid.style.transition = 'max-height 0.42s ease';
-    applyMassagesState({ animate: false });
+    applyMassagesState();
   }
 
   // ========================================
@@ -669,8 +647,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isAnimating) return;
         isAnimating = true;
         currentIndex = nextIndex;
-        updateSlideStates();
         updateTrackPosition(true);
+        updateSlideStates();
 
         window.setTimeout(() => {
           normalizeIndex(false);
