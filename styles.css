@@ -5846,20 +5846,24 @@ body[data-theme='light'] .blog-quote-text {
           padding: 80px 0;
           background: linear-gradient(180deg, var(--color-bg-light) 0%, var(--color-bg) 100%);
         }
-    
         .social-showcase-header {
           text-align: center;
           margin-bottom: 50px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 14px;
         }
-    
         .social-showcase-tag {
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
           font-size: 11px;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: var(--color-primary);
-          margin-bottom: 16px;
+          margin: 0;
           position: relative;
+          line-height: 1.2;
         }
     
         .social-showcase-tag::before,
@@ -5880,13 +5884,13 @@ body[data-theme='light'] .blog-quote-text {
           left: calc(100% + 15px);
           background: linear-gradient(90deg, var(--color-primary), transparent);
         }
-    
         .social-showcase-title {
           font-family: 'Cormorant Garamond', serif;
           font-size: clamp(32px, 5vw, 48px);
           font-weight: 400;
           color: var(--color-text);
-          margin-bottom: 16px;
+          margin: 0 0 16px;
+          line-height: 1.15;
         }
     
         .social-showcase-subtitle {
