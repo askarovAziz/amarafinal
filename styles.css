@@ -1854,7 +1854,7 @@ body[data-theme='light'] .grand-offer-badge {
 .massages-filter-btn.active {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  color: #fff;
+  color: #2a211c;
 }
 
 .massages-grid {
